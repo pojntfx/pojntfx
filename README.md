@@ -13,5 +13,3 @@ If you want to find out more about my projects and what I'm currently working on
 <a display="inline" target="_blank" href="http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=pojntfx&theme=github">
     <img alt="Top languages by repo" src="http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=pojntfx&theme=github" height="160">
 </a>
-
-**Let's build something great together! 👩‍🚀**
