@@ -164,38 +164,44 @@ func main() {
 			return outputCategory.Projects[i].Stars > outputCategory.Projects[j].Stars
 		})
 
-		markdownOutput += "**" + html.EscapeString(outputCategory.Title) + ":**\n\n"
+		markdownOutput += "\n| **" + html.EscapeString(outputCategory.Title) + "** | |\n| - | - |\n"
 
-		for _, project := range outputCategory.Projects {
-			parsedDate, err := time.Parse(time.RFC3339, project.Date)
-			if err != nil {
-				panic(err)
+		for i := 0; i < len(outputCategory.Projects); {
+			markdownLine := "| "
+			for j := 0; j < 2 && i+j < len(outputCategory.Projects); j++ {
+				project := outputCategory.Projects[i+j]
+
+				parsedDate, err := time.Parse(time.RFC3339, project.Date)
+				if err != nil {
+					panic(err)
+				}
+				formattedDate := parsedDate.Format("2006")
+
+				iconMarkdown := ""
+				if project.Icon != "" {
+					iconMarkdown = fmt.Sprintf("<img alt=\"Icon\" src=\"%s\" height=\"30\" align=\"center\"> ", html.EscapeString(project.Icon))
+				}
+
+				displayedTitle := project.Title
+				if strings.Split(project.Title, "/")[0] == *user {
+					displayedTitle = strings.Split(project.Title, "/")[1] // Use just the repo name if owner matches the GitHub user
+				}
+
+				projectMarkdown := fmt.Sprintf("<a display=\"inline\" target=\"_blank\" href=\"%s\"><b>%s%s</b></a> (⭐ %d 🛠️ %s ⚖️ %s 📅 %s) <br>%s",
+					html.EscapeString(project.URL),
+					iconMarkdown,
+					html.EscapeString(displayedTitle),
+					project.Stars,
+					html.EscapeString(project.Language),
+					html.EscapeString(project.License),
+					formattedDate,
+					html.EscapeString(project.Description),
+				)
+				markdownLine += projectMarkdown + " | "
 			}
-			formattedDate := parsedDate.Format("2006")
-
-			iconMarkdown := ""
-			if project.Icon != "" {
-				iconMarkdown = fmt.Sprintf("<img alt=\"Icon\" src=\"%s\" height=\"30\" align=\"center\"> ", html.EscapeString(project.Icon))
-			}
-
-			displayedTitle := project.Title
-			if strings.Split(project.Title, "/")[0] == *user {
-				displayedTitle = strings.Split(project.Title, "/")[1] // Use just the repo name if owner matches the GitHub user
-			}
-
-			markdownLine := fmt.Sprintf("- <a display=\"inline\" target=\"_blank\" href=\"%s\"><b>%s%s</b></a> | ⭐ %d 🛠️ %s ⚖️ %s 📅 %s <br>%s\n",
-				html.EscapeString(project.URL),
-				iconMarkdown,
-				html.EscapeString(displayedTitle),
-				project.Stars,
-				html.EscapeString(project.Language),
-				html.EscapeString(project.License),
-				formattedDate,
-				html.EscapeString(project.Description))
-
-			markdownOutput += markdownLine
+			markdownOutput += markdownLine + "\n"
+			i += 2
 		}
-		markdownOutput += "\n"
 	}
 
 	fmt.Print(markdownOutput)
