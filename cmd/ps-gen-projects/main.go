@@ -179,7 +179,7 @@ func main() {
 
 				iconMarkdown := ""
 				if project.Icon != "" {
-					iconMarkdown = fmt.Sprintf("<img alt=\"Icon\" src=\"%s\" height=\"30\" align=\"center\"> ", html.EscapeString(project.Icon))
+					iconMarkdown = fmt.Sprintf("<img alt=\"Icon\" src=\"%s\" height=\"24\" align=\"top\"> ", html.EscapeString(project.Icon))
 				}
 
 				displayedTitle := project.Title
