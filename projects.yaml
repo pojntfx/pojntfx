@@ -53,7 +53,7 @@
     - slug: pojntfx/saltpanelo
       background: var(--pf-global--palette--blue-400)
       icon: true
-    - slug: pojntfx/dudirekta
+    - slug: pojntfx/panrpc
       background: var(--pf-global--palette--light-blue-600)
       icon: true
     - slug: pojntfx/unisockets
