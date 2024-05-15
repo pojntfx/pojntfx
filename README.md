@@ -2,7 +2,7 @@
 
 # Hi there 👋
 
-I'm **Felicitas 🌊**, an experienced software engineer with a passion for **systems programming in Go**, all things **DevOps** and the **modern web 🌐**.
+I'm **Felicitas 🌊**, an experienced software engineer with a passion for **systems programming in Go**, all things **DevOps** and the **modern web 🌐** from Vancouver, BC 🇨🇦.
 
 <p>
 <a display="inline" target="_blank" href="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=pojntfx&theme=github">
