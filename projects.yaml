@@ -2,7 +2,7 @@
   projects:
     - slug: pojntfx/weron
       background: var(--pf-global--palette--black-850)
-      icon: docs/icon-light.png
+      icon: docs/icon.svg
     - slug: pojntfx/go-nbd
       background: var(--pf-global--palette--gold-600)
       icon: docs/icon-light.png
@@ -25,6 +25,9 @@
     - slug: pojntfx/htorrent
       icon: docs/icon.svg
       background: var(--pf-global--palette--cyan-500)
+    - slug: loopholelabs/drafter
+      icon: docs/icon.svg
+      background: var(--pf-t--color--black)
 - title: Apps
   projects:
     - slug: pojntfx/connmapper
@@ -38,6 +41,9 @@
       icon: docs/icon-light.png
     - slug: pojntfx/html2goapp
       background: var(--pf-global--palette--cyan-400)
+    - slug: loopholelabs/latensee
+      background: var(--pf-t--color--black)
+      icon: docs/icon.svg
 - title: Development Tooling
   projects:
     - slug: pojntfx/hydrapp
