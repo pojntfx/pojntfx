@@ -15,7 +15,7 @@ import (
 
 	"github.com/google/go-github/v42/github"
 	"golang.org/x/oauth2"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
 // Output
