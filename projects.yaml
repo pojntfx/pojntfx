@@ -5,7 +5,7 @@
       icon: docs/icon.svg
     - slug: pojntfx/go-nbd
       background: var(--pf-global--palette--gold-600)
-      icon: docs/icon-light.png
+      icon: docs/icon.svg
     - slug: pojntfx/stfs
       background: var(--pf-global--palette--blue-400)
     - slug: pojntfx/tapisk
@@ -17,10 +17,10 @@
       background: var(--pf-global--palette--light-blue-600)
       icon: assets/bofied Icon.svg
     - slug: pojntfx/r3map
-      icon: docs/icon-light.png
+      icon: docs/icon.svg
       background: var(--pf-global--palette--gold-600)
     - slug: pojntfx/ram-dl
-      icon: docs/icon-light.png
+      icon: docs/icon.svg
       background: var(--pf-global--palette--black-850)
     - slug: pojntfx/htorrent
       icon: docs/icon.svg
@@ -55,7 +55,7 @@
       background: var(--pf-global--palette--black-850)
     - slug: pojntfx/octarchive
       background: var(--pf-global--palette--gold-600)
-      icon: docs/icon-light.png
+      icon: docs/icon.svg
     - slug: pojntfx/pojde
       background: var(--pf-global--palette--light-green-700)
 - title: Distributed Computing
@@ -76,6 +76,6 @@
   projects:
     - slug: pojntfx/deliverance
       background: var(--pf-global--palette--black-850)
-      icon: docs/icon-light.png
+      icon: docs/icon.svg
     - slug: pojntfx/networked-linux-memsync
       background: var(--pf-global--palette--red-400)
