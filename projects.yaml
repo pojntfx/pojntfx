@@ -15,7 +15,7 @@
       background: var(--pf-global--palette--cyan-500)
     - slug: pojntfx/bofied
       background: var(--pf-global--palette--light-blue-600)
-      icon: assets/bofied Icon.svg
+      icon: docs/icon.svg
     - slug: pojntfx/r3map
       icon: docs/icon.svg
       background: var(--pf-global--palette--gold-600)
