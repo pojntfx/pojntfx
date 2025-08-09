@@ -30,7 +30,6 @@ type OutputProject struct {
 	Stars       int      `yaml:"stars"`
 	Forks       int      `yaml:"forks"`
 	Issues      int      `yaml:"issues"`
-	Background  string   `yaml:"background"`
 	Icon        string   `yaml:"icon"`
 }
 
@@ -46,9 +45,8 @@ type InputCategory struct {
 }
 
 type InputProject struct {
-	Slug       string `yaml:"slug"`
-	Background string `yaml:"background"`
-	Icon       string `yaml:"icon"`
+	Slug string `yaml:"slug"`
+	Icon string `yaml:"icon"`
 }
 
 func main() {
@@ -150,7 +148,6 @@ func main() {
 				Stars:       project.GetStargazersCount(),
 				Forks:       project.GetForksCount(),
 				Issues:      project.GetOpenIssuesCount(),
-				Background:  inputProject.Background,
 				Icon:        icon,
 			})
 		}

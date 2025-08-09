@@ -1,81 +1,56 @@
 - title: Systems Development
   projects:
     - slug: pojntfx/weron
-      background: var(--pf-global--palette--black-850)
       icon: docs/icon.svg
     - slug: pojntfx/go-nbd
-      background: var(--pf-global--palette--gold-600)
       icon: docs/icon.svg
     - slug: pojntfx/stfs
-      background: var(--pf-global--palette--blue-400)
     - slug: pojntfx/tapisk
-      background: var(--pf-global--palette--light-green-700)
       icon: docs/icon-light.png
     - slug: pojntfx/liwasc
-      background: var(--pf-global--palette--cyan-500)
     - slug: pojntfx/bofied
-      background: var(--pf-global--palette--light-blue-600)
       icon: docs/icon.svg
     - slug: pojntfx/r3map
       icon: docs/icon.svg
-      background: var(--pf-global--palette--gold-600)
     - slug: pojntfx/ram-dl
       icon: docs/icon.svg
-      background: var(--pf-global--palette--black-850)
     - slug: pojntfx/htorrent
       icon: docs/icon.svg
-      background: var(--pf-global--palette--cyan-500)
     - slug: loopholelabs/drafter
       icon: docs/icon.svg
-      background: var(--pf-t--color--black)
 - title: Apps
   projects:
     - slug: pojntfx/connmapper
-      background: var(--pf-global--palette--light-green-600)
       icon: docs/icon.svg
     - slug: pojntfx/multiplex
-      background: var(--pf-global--palette--gold-600)
       icon: docs/icon.svg
     - slug: pojntfx/keygaen
-      background: var(--pf-global--palette--blue-500)
       icon: docs/icon-light.png
     - slug: pojntfx/html2goapp
-      background: var(--pf-global--palette--cyan-400)
+    - slug: pojntfx/sessions
+      icon: assets/meta/icon.svg
     - slug: loopholelabs/latensee
-      background: var(--pf-t--color--black)
       icon: docs/icon.svg
 - title: Development Tooling
   projects:
     - slug: pojntfx/hydrapp
-      background: var(--pf-global--palette--green-700)
       icon: docs/icon.svg
     - slug: pojntfx/hydrun
-      background: var(--pf-global--palette--purple-600)
     - slug: pojntfx/alpimager
-      background: var(--pf-global--palette--black-850)
     - slug: pojntfx/octarchive
-      background: var(--pf-global--palette--gold-600)
       icon: docs/icon.svg
     - slug: pojntfx/pojde
-      background: var(--pf-global--palette--light-green-700)
 - title: Distributed Computing
   projects:
     - slug: pojntfx/saltpanelo
-      background: var(--pf-global--palette--blue-400)
       icon: docs/icon-light.png
     - slug: pojntfx/panrpc
-      background: var(--pf-global--palette--light-blue-600)
       icon: docs/icon.svg
     - slug: pojntfx/unisockets
-      background: var(--pf-global--palette--gold-600)
     - slug: pojntfx/tinynet
-      background: var(--pf-global--palette--cyan-600)
     - slug: pojntfx/webnetes
-      background: var(--pf-global--palette--red-400)
 - title: Digital Publishing
   projects:
     - slug: pojntfx/deliverance
-      background: var(--pf-global--palette--black-850)
       icon: docs/icon.svg
     - slug: pojntfx/networked-linux-memsync
-      background: var(--pf-global--palette--red-400)
