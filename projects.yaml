@@ -23,7 +23,7 @@
     - slug: pojntfx/connmapper
       icon: docs/icon.svg
     - slug: pojntfx/multiplex
-      icon: docs/icon.svg
+      icon: assets/meta/icon.svg
     - slug: pojntfx/keygaen
       icon: docs/icon-light.png
     - slug: pojntfx/html2goapp
