@@ -3,6 +3,7 @@ package main
 import (
 	"cmp"
 	"context"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"html"
@@ -69,16 +70,11 @@ type ForgeConfig struct {
 	Emoji  string    `yaml:"emoji"`
 }
 
-type ForgeSecret struct {
-	Domain string `yaml:"domain"`
-	Token  string `yaml:"token"`
-}
-
 func main() {
 	verbosity := flag.String("verbosity", "info", "Log level (debug, info, warn, error)")
 	projectsFile := flag.String("projects", "projects.yaml", "Projects configuration file")
 	forgesFile := flag.String("forges", "forges.yaml", "Forges configuration file")
-	secretsFile := flag.String("secrets", "secrets.yaml", "Secrets configuration file")
+	tokens := flag.String("tokens", "", "Forge tokens as JSON object, e.g. {\"github.com\": \"token\"} (can also be set using the FORGE_TOKENS env variable)")
 	user := flag.String("user", "pojntfx", "Default username to omit from display (can also be set using the FORGE_USER env variable)")
 
 	flag.Parse()
@@ -116,21 +112,17 @@ func main() {
 		forges[f.Domain] = f
 	}
 
-	log.Info("Reading secrets configuration", "file", *secretsFile)
-
-	secretsData, err := os.ReadFile(*secretsFile)
-	if err != nil {
-		panic(err)
+	if tokensEnv := os.Getenv("FORGE_TOKENS"); tokensEnv != "" {
+		*tokens = tokensEnv
 	}
 
-	var secretsList []ForgeSecret
-	if err := yaml.Unmarshal(secretsData, &secretsList); err != nil {
-		panic(err)
-	}
+	secrets := map[string]string{}
+	if *tokens != "" {
+		log.Info("Parsing forge tokens")
 
-	secrets := map[string]ForgeSecret{}
-	for _, s := range secretsList {
-		secrets[s.Domain] = s
+		if err := json.Unmarshal([]byte(*tokens), &secrets); err != nil {
+			panic(fmt.Errorf("failed to parse tokens: %w", err))
+		}
 	}
 
 	githubClients := map[string]*github.Client{}
@@ -139,12 +131,12 @@ func main() {
 		switch forge.Type {
 		case ForgeTypeGitHub:
 			var httpClient *http.Client
-			if secret, ok := secrets[domain]; ok && secret.Token != "" {
+			if token, ok := secrets[domain]; ok && token != "" {
 				httpClient = oauth2.NewClient(
 					ctx,
 					oauth2.StaticTokenSource(
 						&oauth2.Token{
-							AccessToken: secret.Token,
+							AccessToken: token,
 						},
 					),
 				)
@@ -161,8 +153,8 @@ func main() {
 			options := []forgejo.ClientOption{
 				forgejo.SetContext(ctx),
 			}
-			if secret, ok := secrets[domain]; ok && secret.Token != "" {
-				options = append(options, forgejo.SetToken(secret.Token))
+			if token, ok := secrets[domain]; ok && token != "" {
+				options = append(options, forgejo.SetToken(token))
 			}
 
 			client, err := forgejo.NewClient(forge.API, options...)
