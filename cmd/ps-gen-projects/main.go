@@ -363,8 +363,6 @@ func main() {
 					}
 				}
 
-				displayedTitle = project.ForgeEmoji + "/" + displayedTitle
-
 				languagePart := ""
 				if project.Language != "" {
 					languagePart = fmt.Sprintf(" 🛠️ %s", html.EscapeString(project.Language))
@@ -375,7 +373,12 @@ func main() {
 					licensePart = fmt.Sprintf(" ⚖️ %s", html.EscapeString(project.License))
 				}
 
-				projectMarkdown := fmt.Sprintf("<a display=\"inline\" target=\"_blank\" href=\"%s\"><b>%s%s</b></a> (⭐ %d%s%s 📅 %s) <br>%s",
+				forgePart := ""
+				if project.ForgeEmoji != "" && project.ForgeDomain != "" {
+					forgePart = fmt.Sprintf(" %s %s", project.ForgeEmoji, html.EscapeString(project.ForgeDomain))
+				}
+
+				projectMarkdown := fmt.Sprintf("<a display=\"inline\" target=\"_blank\" href=\"%s\"><b>%s%s</b></a> (⭐ %d%s%s 📅 %s%s) <br>%s",
 					html.EscapeString(project.URL),
 					iconMarkdown,
 					html.EscapeString(displayedTitle),
@@ -383,6 +386,7 @@ func main() {
 					languagePart,
 					licensePart,
 					formattedDate,
+					forgePart,
 					html.EscapeString(project.Description),
 				)
 				markdownLine += projectMarkdown + " | "
