@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"html"
+	"log/slog"
 	"net/http"
 	"net/url"
 	"os"
@@ -13,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/google/go-github/v42/github"
+	"github.com/google/go-github/v68/github"
 	"golang.org/x/oauth2"
 	"gopkg.in/yaml.v3"
 )
@@ -50,29 +51,44 @@ type InputProject struct {
 }
 
 func main() {
+	verbosity := flag.String("verbosity", "info", "Log level (debug, info, warn, error)")
 	src := flag.String("src", "projects.yaml", "Source YAML file")
-	api := flag.String("api", "https://api.github.com/", "GitHub/Gitea API endpoint to use (can also be set using the GITHUB_API env variable)")
-	cdn := flag.String("cdn", "https://raw.githubusercontent.com/", "GitHub/Gitea CDN endpoint to use (can also be set using the GITHUB_CDN env variable)")
-	token := flag.String("token", "", "GitHub/Gitea API access token (can also be set using the GITHUB_TOKEN env variable)")
-	user := flag.String("user", "pojntfx", "GitHub username (can also be set using the GITHUB_USER env variable)")
+	api := flag.String("api", "https://api.github.com/", "GitHub/Forgejo API endpoint to use (can also be set using the FORGE_API env variable)")
+	cdn := flag.String("cdn", "https://raw.githubusercontent.com/", "GitHub/Forgejo CDN endpoint to use (can also be set using the FORGE_CDN env variable)")
+	token := flag.String("token", "", "GitHub/Forgejo API access token (can also be set using the FORGE_TOKEN env variable)")
+	user := flag.String("user", "pojntfx", "GitHub username (can also be set using the FORGE_USER env variable)")
 
 	flag.Parse()
 
-	if *api == "" {
-		*api = os.Getenv("GITHUB_API")
+	var level slog.Level
+	if err := level.UnmarshalText([]byte(*verbosity)); err != nil {
+		panic(err)
 	}
 
-	if *cdn == "" {
-		*cdn = os.Getenv("GITHUB_CDN")
+	log := slog.New(slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{
+		Level: level,
+	}))
+
+	if apiEnv := os.Getenv("FORGE_API"); apiEnv != "" {
+		*api = apiEnv
 	}
 
-	if *token == "" {
-		*token = os.Getenv("GITHUB_TOKEN")
+	if cdnEnv := os.Getenv("FORGE_CDN"); cdnEnv != "" {
+		*cdn = cdnEnv
 	}
 
-	if *user == "" {
-		*user = os.Getenv("GITHUB_USER")
+	if tokenEnv := os.Getenv("FORGE_TOKEN"); tokenEnv != "" {
+		*token = tokenEnv
 	}
+
+	if userEnv := os.Getenv("FORGE_USER"); userEnv != "" {
+		*user = userEnv
+	}
+
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	log.Info("Reading input file", "src", *src)
 
 	input, err := os.ReadFile(*src)
 	if err != nil {
@@ -87,7 +103,7 @@ func main() {
 	var httpClient *http.Client
 	if *token != "" {
 		httpClient = oauth2.NewClient(
-			context.Background(),
+			ctx,
 			oauth2.StaticTokenSource(
 				&oauth2.Token{
 					AccessToken: *token,
@@ -104,6 +120,8 @@ func main() {
 
 	parsedOutput := []OutputCategory{}
 	for _, inputCategory := range parsedInput {
+		log.Info("Processing category", "title", inputCategory.Title)
+
 		outputCategory := OutputCategory{
 			Title:    inputCategory.Title,
 			Projects: []OutputProject{},
@@ -111,8 +129,11 @@ func main() {
 
 		for _, inputProject := range inputCategory.Projects {
 			owner, repo := path.Split(inputProject.Slug)
+			ownerTrimmed := strings.TrimSuffix(owner, "/")
 
-			project, _, err := client.Repositories.Get(context.Background(), strings.TrimSuffix(owner, "/"), repo)
+			log.Debug("Fetching repository", "owner", ownerTrimmed, "repo", repo)
+
+			project, _, err := client.Repositories.Get(ctx, ownerTrimmed, repo)
 			if err != nil {
 				panic(err)
 			}
@@ -122,14 +143,14 @@ func main() {
 				license = l.GetSPDXID()
 			}
 
-			commits, _, err := client.Repositories.ListCommits(context.Background(), strings.TrimSuffix(owner, "/"), repo, &github.CommitsListOptions{})
+			commits, _, err := client.Repositories.ListCommits(ctx, ownerTrimmed, repo, &github.CommitsListOptions{})
 			if err != nil {
 				panic(err)
 			}
 
 			latestCommitDate := project.GetPushedAt().Time
 			if len(commits) > 0 {
-				latestCommitDate = *commits[0].Commit.Author.Date
+				latestCommitDate = commits[0].Commit.Author.Date.Time
 			}
 
 			icon := ""
@@ -150,6 +171,8 @@ func main() {
 				Issues:      project.GetOpenIssuesCount(),
 				Icon:        icon,
 			})
+
+			log.Debug("Processed repository", "fullName", project.GetFullName(), "stars", project.GetStargazersCount())
 		}
 
 		parsedOutput = append(parsedOutput, outputCategory)
