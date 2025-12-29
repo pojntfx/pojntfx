@@ -1,6 +1,7 @@
 package main
 
 import (
+	"cmp"
 	"context"
 	"flag"
 	"fmt"
@@ -9,8 +10,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"path"
-	"sort"
+	"slices"
 	"strings"
 	"time"
 
@@ -244,7 +244,11 @@ func main() {
 
 				icon := ""
 				if inputProject.Icon != "" {
-					icon = forge.CDN + owner + "/" + repo + "/" + project.GetDefaultBranch() + "/" + inputProject.Icon
+					var err error
+					icon, err = url.JoinPath(forge.CDN, owner, repo, project.GetDefaultBranch(), inputProject.Icon)
+					if err != nil {
+						panic(err)
+					}
 				}
 
 				outputProject = OutputProject{
@@ -301,7 +305,11 @@ func main() {
 
 				icon := ""
 				if inputProject.Icon != "" {
-					icon = forge.CDN + owner + "/" + repo + "/raw/branch/" + project.DefaultBranch + "/" + inputProject.Icon
+					var err error
+					icon, err = url.JoinPath(forge.CDN, owner, repo, "raw", "branch", project.DefaultBranch, inputProject.Icon)
+					if err != nil {
+						panic(err)
+					}
 				}
 
 				outputProject = OutputProject{
@@ -331,8 +339,8 @@ func main() {
 
 	markdownOutput := ""
 	for _, outputCategory := range parsedOutput {
-		sort.Slice(outputCategory.Projects, func(i, j int) bool {
-			return outputCategory.Projects[i].Stars > outputCategory.Projects[j].Stars
+		slices.SortFunc(outputCategory.Projects, func(a, b OutputProject) int {
+			return cmp.Compare(b.Stars, a.Stars)
 		})
 
 		markdownOutput += "\n| **" + html.EscapeString(outputCategory.Title) + "** | |\n| - | - |\n"
@@ -359,7 +367,7 @@ func main() {
 					if titleParts[0] == *user {
 						displayedTitle = titleParts[1]
 					} else {
-						displayedTitle = path.Join(titleParts[0], titleParts[1])
+						displayedTitle = strings.Join(titleParts[:2], "/")
 					}
 				}
 
