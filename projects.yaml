@@ -1,56 +1,56 @@
 - title: Systems Development
   projects:
-    - slug: pojntfx/weron
+    - repo: github.com/pojntfx/weron
       icon: docs/icon.svg
-    - slug: pojntfx/go-nbd
+    - repo: github.com/pojntfx/go-nbd
       icon: docs/icon.svg
-    - slug: pojntfx/stfs
-    - slug: pojntfx/tapisk
+    - repo: github.com/pojntfx/stfs
+    - repo: github.com/pojntfx/tapisk
       icon: docs/icon-light.png
-    - slug: pojntfx/liwasc
-    - slug: pojntfx/bofied
+    - repo: github.com/pojntfx/liwasc
+    - repo: github.com/pojntfx/bofied
       icon: docs/icon.svg
-    - slug: pojntfx/r3map
+    - repo: github.com/pojntfx/r3map
       icon: docs/icon.svg
-    - slug: pojntfx/ram-dl
+    - repo: github.com/pojntfx/ram-dl
       icon: docs/icon.svg
-    - slug: pojntfx/htorrent
+    - repo: github.com/pojntfx/htorrent
       icon: docs/icon.svg
-    - slug: loopholelabs/drafter
+    - repo: github.com/loopholelabs/drafter
       icon: docs/icon.svg
 - title: Apps
   projects:
-    - slug: pojntfx/connmapper
+    - repo: github.com/pojntfx/connmapper
       icon: docs/icon.svg
-    - slug: pojntfx/multiplex
+    - repo: github.com/pojntfx/multiplex
       icon: assets/meta/icon.svg
-    - slug: pojntfx/keygaen
+    - repo: github.com/pojntfx/keygaen
       icon: docs/icon-light.png
-    - slug: pojntfx/html2goapp
-    - slug: pojntfx/sessions
+    - repo: github.com/pojntfx/html2goapp
+    - repo: github.com/pojntfx/sessions
       icon: assets/meta/icon.svg
-    - slug: loopholelabs/latensee
+    - repo: github.com/loopholelabs/latensee
       icon: docs/icon.svg
 - title: Development Tooling
   projects:
-    - slug: pojntfx/hydrapp
+    - repo: github.com/pojntfx/hydrapp
       icon: docs/icon.svg
-    - slug: pojntfx/hydrun
-    - slug: pojntfx/alpimager
-    - slug: pojntfx/octarchive
+    - repo: github.com/pojntfx/hydrun
+    - repo: github.com/pojntfx/alpimager
+    - repo: github.com/pojntfx/octarchive
       icon: docs/icon.svg
-    - slug: pojntfx/pojde
+    - repo: github.com/pojntfx/pojde
 - title: Distributed Computing
   projects:
-    - slug: pojntfx/saltpanelo
+    - repo: github.com/pojntfx/saltpanelo
       icon: docs/icon-light.png
-    - slug: pojntfx/panrpc
+    - repo: github.com/pojntfx/panrpc
       icon: docs/icon.svg
-    - slug: pojntfx/unisockets
-    - slug: pojntfx/tinynet
-    - slug: pojntfx/webnetes
+    - repo: github.com/pojntfx/unisockets
+    - repo: github.com/pojntfx/tinynet
+    - repo: github.com/pojntfx/webnetes
 - title: Digital Publishing
   projects:
-    - slug: pojntfx/deliverance
+    - repo: github.com/pojntfx/deliverance
       icon: docs/icon.svg
-    - slug: pojntfx/networked-linux-memsync
+    - repo: github.com/pojntfx/networked-linux-memsync
