@@ -5,6 +5,6 @@
   emoji: 🐙
 - domain: codeberg.org
   type: forgejo
-  api: https://codeberg.org/api/v1/
+  api: https://codeberg.org/
   cdn: https://codeberg.org/
   emoji: 🏔️
