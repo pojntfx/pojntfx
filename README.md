@@ -2,7 +2,7 @@
 
 # Hi there!
 
-I'm Felicitas, an experienced software developer with a passion for systems programming in Go, all things DevOps and the modern web.
+I'm Felicitas, an experienced software developer who likes building infrastructure that lasts in the [Linux](https://kernel.org/), [Kubernetes](https://kubernetes.io/), virtualization, [WebAssembly](https://webassembly.org/) and [GNOME](https://www.gnome.org/) communities. I'm active here on GitHub, on [Codeberg](https://codeberg.org/pojntfx), and on various other forges under the `pojntfx` username.
 
 <p>
 <a display="inline" target="_blank" href="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=pojntfx&theme=github">
