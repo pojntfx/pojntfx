@@ -35,7 +35,7 @@ type OutputProject struct {
 	Issues      int      `yaml:"issues"`
 	Icon        string   `yaml:"icon"`
 	ForgeDomain string   `yaml:"forgeDomain"`
-	ForgeEmoji  string   `yaml:"forgeEmoji"`
+	ForgeName   string   `yaml:"forgeName"`
 }
 
 type OutputCategory struct {
@@ -67,7 +67,7 @@ type ForgeConfig struct {
 	Type   ForgeType `yaml:"type"`
 	API    string    `yaml:"api"`
 	CDN    string    `yaml:"cdn"`
-	Emoji  string    `yaml:"emoji"`
+	Name   string    `yaml:"name"`
 }
 
 func main() {
@@ -256,7 +256,7 @@ func main() {
 					Issues:      project.GetOpenIssuesCount(),
 					Icon:        icon,
 					ForgeDomain: domain,
-					ForgeEmoji:  forge.Emoji,
+					ForgeName:   forge.Name,
 				}
 			case ForgeTypeForgejo:
 				client, ok := forgejoClients[domain]
@@ -317,7 +317,7 @@ func main() {
 					Issues:      project.OpenIssues,
 					Icon:        icon,
 					ForgeDomain: domain,
-					ForgeEmoji:  forge.Emoji,
+					ForgeName:   forge.Name,
 				}
 			}
 
@@ -365,20 +365,20 @@ func main() {
 
 				languagePart := ""
 				if project.Language != "" {
-					languagePart = fmt.Sprintf(" 🛠️ %s", html.EscapeString(project.Language))
+					languagePart = fmt.Sprintf(", %s", html.EscapeString(project.Language))
 				}
 
 				licensePart := ""
 				if project.License != "" {
-					licensePart = fmt.Sprintf(" ⚖️ %s", html.EscapeString(project.License))
+					licensePart = fmt.Sprintf(", %s", html.EscapeString(project.License))
 				}
 
 				forgePrefix := ""
-				if project.ForgeEmoji != "" && project.ForgeDomain != "" {
-					forgePrefix = fmt.Sprintf("%s %s ", project.ForgeEmoji, html.EscapeString(project.ForgeDomain))
+				if project.ForgeName != "" {
+					forgePrefix = fmt.Sprintf("%s ", html.EscapeString(project.ForgeName))
 				}
 
-				projectMarkdown := fmt.Sprintf("<a display=\"inline\" target=\"_blank\" href=\"%s\"><b>%s%s</b></a> (%s⭐ %d%s%s 📅 %s) <br>%s",
+				projectMarkdown := fmt.Sprintf("<a display=\"inline\" target=\"_blank\" href=\"%s\"><b>%s%s</b></a> (%s⭐ %d%s%s, %s) <br>%s",
 					html.EscapeString(project.URL),
 					iconMarkdown,
 					html.EscapeString(displayedTitle),
