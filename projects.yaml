@@ -40,6 +40,7 @@
     - repo: github.com/pojntfx/octarchive
       icon: docs/icon.svg
     - repo: github.com/pojntfx/pojde
+    - repo: codeberg.org/puregotk/puregotk
 - title: Distributed Computing
   projects:
     - repo: github.com/pojntfx/saltpanelo
