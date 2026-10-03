@@ -18,6 +18,7 @@
       icon: docs/icon.svg
     - repo: github.com/loopholelabs/drafter
       icon: docs/icon.svg
+    - repo: codeberg.org/pojntfx/pushrod
 - title: Apps
   projects:
     - repo: github.com/pojntfx/connmapper
@@ -31,6 +32,7 @@
       icon: assets/meta/icon.svg
     - repo: github.com/loopholelabs/latensee
       icon: docs/icon.svg
+    - repo: codeberg.org/pojntfx/gatekeeper
 - title: Development Tooling
   projects:
     - repo: github.com/pojntfx/hydrapp
@@ -41,6 +43,10 @@
       icon: docs/icon.svg
     - repo: github.com/pojntfx/pojde
     - repo: codeberg.org/puregotk/puregotk
+    - repo: github.com/pojntfx/senbara
+      icon: senbara-forms/docs/icon.svg
+    - repo: github.com/pojntfx/go-gettext
+    - repo: github.com/pojntfx/the-commitment
 - title: Distributed Computing
   projects:
     - repo: github.com/pojntfx/saltpanelo
